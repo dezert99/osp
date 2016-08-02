@@ -1,0 +1,15 @@
+<ul>
+  <% @guests.each do |guest| %>
+    <li>
+      <%= guest.full_name %>
+      <%= link_to "View", guest %>
+      <%= link_to "Edit", edit_guest_path(guest) %>
+    </li>
+  <% end %>
+</ul>
+
+<% if @guests.empty? %>
+  <h3>No guests added</h3>
+<% end %>
+
+<%= link_to "Add Guest", new_guest_path %>
