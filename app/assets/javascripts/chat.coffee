@@ -6,9 +6,6 @@ $(document).ready ->
   username = {}
 
   setupChannel = ->
-    chatChannel.join().then (channel) ->
-      printMessage(username + ' joined the chat.')
-
     chatChannel.on 'messageAdded', (message) ->
       printMessage(message.author + ": " + message.body)
 
