@@ -7,4 +7,7 @@ Rails.application.routes.draw do
 
   post 'tokens' => 'tokens#create'
   get 'chat' => 'chats#index'
+
+  get 'notify' => 'notifications#index'
+  get 'validate_message' => 'notifications#validate_message'
 end

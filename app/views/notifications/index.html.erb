@@ -1,0 +1,9 @@
+<%= form_tag "validate_message", method: "get" do %>
+  <%= label_tag(:phone_number, "Phone Number") %>
+  <%= text_field_tag :phone_number, nil, required: true %>
+
+  <%= label_tag :text_message, "Text Message" %>
+  <%= text_field_tag :alert_message, nil, required: true %>
+
+  <%= submit_tag("Send Message") %>
+<% end %>
