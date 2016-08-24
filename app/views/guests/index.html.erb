@@ -1,15 +1,40 @@
-<ul>
-  <% @guests.each do |guest| %>
-    <li>
-      <%= guest.full_name %>
-      <%= link_to "View", guest %>
-      <%= link_to "Edit", edit_guest_path(guest) %>
-    </li>
+<div class="container-fluid guest-index">
+  <div class="col-sm-4 tablist-col">
+    <%= link_to "Add Guest", new_guest_path %>
+
+    <ul class="nav nav-stacked nav-pills nav-tabs" role="tablist" id="guestTabs">
+      <% @guests.each_with_index do |guest, index| %>
+        <li>
+          <a href="#guest<%= index %>">
+            <span class="guest-avatar badge"><%= guest.initials %></span>
+            <%= guest.full_name %>
+          </a>
+        </li>
+      <% end %>
+    </ul>
+
+    <% if @guests.empty? %>
+      <h3>No guests added</h3>
+    <% end %>
+  </div>
+
+
+  <div class="col-sm-8">
+    <div class="tab-content">
+      <% @guests.each_with_index do |guest, index| %>
+        <div role="tabpanel" class="tab-pane" id="guest<%= index %>">
+          <%= render "show", guest: guest %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% content_for :dom_ready do %>
+    $('#guestTabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+
+    $('#guestTabs a:first').tab('show') // Select first tab
   <% end %>
-</ul>
-
-<% if @guests.empty? %>
-  <h3>No guests added</h3>
-<% end %>
-
-<%= link_to "Add Guest", new_guest_path %>
+</div>

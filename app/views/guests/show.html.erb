@@ -1,8 +1,0 @@
-<h2><%= @guest.full_name %></h2>
-
-<%= link_to "Delete Guest", guest_path(@guest),
-    method: :delete,
-    data: {confirm: 'Are you sure?'}
-%>
-
-<%= link_to "Back to Guest List", guests_path %>

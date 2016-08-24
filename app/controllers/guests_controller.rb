@@ -19,7 +19,7 @@ class GuestsController < ApplicationController
     @guest = Guest.new(guest_params)
 
     if @guest.save
-      redirect_to @guest
+      redirect_to guests_path
     else
       render "new"
     end
@@ -29,7 +29,7 @@ class GuestsController < ApplicationController
     @guest = Guest.find(params[:id])
 
     if @guest.update(guest_params)
-      redirect_to @guest
+      redirect_to guests_path
     else
       render "edit"
     end
