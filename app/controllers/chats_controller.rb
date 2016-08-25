@@ -3,5 +3,6 @@ class ChatsController < ApplicationController
 
   def index
     @user = current_user
+    response.headers['X-Frame-Options'] = 'ALLOWALL'
   end
 end
