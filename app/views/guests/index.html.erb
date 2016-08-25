@@ -1,11 +1,12 @@
 <div class="container-fluid guest-index">
   <div class="col-sm-4 tablist-col">
-    <%= link_to "Add Guest", new_guest_path %>
 
+    <input id="guestSearch" name="search" placeholder="Search" type="text" data-list="#guestTabs">
+    <%= link_to "Add Guest", new_guest_path %>
     <ul class="nav nav-stacked nav-pills nav-tabs" role="tablist" id="guestTabs">
-      <% @guests.each_with_index do |guest, index| %>
+      <% @guests.each do |guest| %>
         <li>
-          <a href="#guest<%= index %>">
+          <a href="#guest<%= guest.id %>">
             <span class="guest-avatar badge"><%= guest.initials %></span>
             <%= guest.full_name %>
           </a>
@@ -21,8 +22,8 @@
 
   <div class="col-sm-8">
     <div class="tab-content">
-      <% @guests.each_with_index do |guest, index| %>
-        <div role="tabpanel" class="tab-pane" id="guest<%= index %>">
+      <% @guests.each do |guest| %>
+        <div role="tabpanel" class="tab-pane" id="guest<%= guest.id %>">
           <%= render "show", guest: guest %>
         </div>
       <% end %>
@@ -36,5 +37,10 @@
     })
 
     $('#guestTabs a:first').tab('show') // Select first tab
+
+    $('#guestTabs').stickyTabs();
+    $('#guestSearch').hideseek({
+      list: '#guestTabs'
+    });
   <% end %>
 </div>

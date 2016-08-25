@@ -49,7 +49,9 @@
     <%= yield %>
 
     <script type="text/javascript">
-      <%= yield :dom_ready %>
+      $(document).ready(function(){
+        <%= yield :dom_ready %>
+      });
     </script>
   </body>
 </html>

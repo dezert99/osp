@@ -6,8 +6,17 @@ $(document).ready ->
   username = {}
 
   setupChannel = ->
-    chatChannel.on 'messageAdded', (message) ->
-      printMessage(message.author + ": " + message.body)
+    chatChannel.join().then ->
+      chatChannel.on 'messageAdded', (message) ->
+        printMessage "#{message.author}: #{message.body}"
+
+
+      chatChannel.getMessages().then (messages) ->
+        totalMessages = messages.length
+        for message in messages
+          printMessage(message.author + ": " + message.body);
+
+        $(document).scrollTop $(document).height()
 
   $input = $('#chat-input')
   $input.on 'keydown', (e) ->
@@ -20,14 +29,14 @@ $(document).ready ->
     accessManager = new Twilio.AccessManager(data.token)
     messagingClient = new Twilio.IPMessaging.Client(accessManager)
 
-    messagingClient.getChannelByUniqueName('chat').then (channel) ->
+    messagingClient.getChannelByUniqueName('off-chat').then (channel) ->
       if (channel)
         chatChannel = channel
         setupChannel()
       else
         messagingClient.createChannel(
-          uniqueName: 'chat'
-          friendlyName: 'Chat Channel'
+          uniqueName: 'off-chat'
+          friendlyName: 'OSP1'
         )
         .then (channel) ->
           chatChannel = channel

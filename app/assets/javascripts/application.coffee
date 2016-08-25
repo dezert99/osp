@@ -14,3 +14,5 @@
 #= require jquery_ujs
 #= require turbolinks
 #= require bootstrap.min
+#= require stickytabs
+#= require hideseek.min
