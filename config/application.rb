@@ -13,5 +13,7 @@ module OnSitePlanner
     # -- all .rb files in that directory are automatically loaded.
 
     config.sass.preferred_syntax = :sass
+
+    config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
   end
 end
